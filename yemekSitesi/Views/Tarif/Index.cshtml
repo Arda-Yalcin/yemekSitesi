@@ -1,0 +1,49 @@
+@model List<Tarif>
+
+@{
+     ViewData["Title"] = "Tarif";
+}
+
+<div class="row mb-3">
+    <a asp-action="Create" asp-controller="Tarif" class="btn btn-primary">Yeni Tarif oluştur</a>
+</div>
+
+@if(TempData["mesaj"]!=null){
+    <div class="row text-center" style="border-radius: 20px; border:1px solid rgba(0, 68, 255, 0.384); background-color:rgba(30, 86, 189, 0.315); margin-bottom:20px; "> 
+        <h3 class="alert alert info"> Tarif Silindi</h3>
+    </div>
+   
+}
+
+<div class="row">
+    @foreach(var item in Model){
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="img/@item.Foto" alt="">
+                <h3 class="card-title">@item.Ad</h3>
+                <p class="card-text">Malzemeler = @item.Malzemeler</p>
+                <p class="card-text">Yapiliş = @item.Yonerge</p>
+                <button class="btn btn-danger" onclick="yemekSil(@item.Id)">Sil</button>   
+                <a asp-action="Edit" asp-controller="Tarif" class="btn btn-primary" asp-route-id=@item.Id> Düzenle</a>
+            </div>
+        </div>
+    </div>
+ 
+}
+</div>
+
+
+@section Scripts{
+    <script>
+        function yemekSil(x){
+            var sonuc=confirm("Silmek istediğinize emin misiniz?");
+            if(sonuc){
+                window.location.href="/Tarif/Delete/"+x;
+            }
+        }
+
+    </script>
+
+}

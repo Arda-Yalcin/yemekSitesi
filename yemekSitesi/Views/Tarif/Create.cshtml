@@ -1,0 +1,63 @@
+@using System.Security.Cryptography
+@{
+    ViewData["Title"]="Create";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if(ViewBag.Hata!=null){
+    <p class="text-danger my-2">@ViewBag.Hata</p>
+}
+
+<form asp-action="Create" asp-controller="Tarif" method="post" enctype="multipart/form-data">
+
+    <div class="container">
+        <form>
+            <div class="mb-3 row">
+                <label for="inputName" class="col-4 col-form-label" >Ad</label>
+                <div class="col-8">         
+                    <input type="text" class="form-control" name="Ad" id="inputName" placeholder="Ad" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="inputName" class="col-4 col-form-label" >Malzemeler</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" name="Malzemeler" id="inputName" placeholder="Malzemeler" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="inputName" class="col-4 col-form-label" >Tarif</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" name="Yonerge" id="inputName" placeholder="Yapılış" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="inputName" class="col-4 col-form-label"> Fotoğraf</label>
+                <div class="col-8">
+                    <div class="mb-3">
+                        <input type="file" class="form-control" name="Foto" id="inputName" placeholder="Fotoğraf Yükle" aria-describedby="fileHelpId" />
+                    </div>
+                    
+                </div>
+            </div>
+
+
+
+            <div class="mb-3 row">
+                <div class="offset-sm-4 col-sm-8">
+                    <button type="submit" class="btn btn-primary">
+                        Action
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+</form>
