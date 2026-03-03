@@ -63,32 +63,35 @@ namespace yemekSitesi.Controllers
         [HttpPost]
         public IActionResult Create(Tarif tarif, IFormFile Foto)
         {
-            if(Foto != null)
+            if (ModelState.IsValid)
             {
-                //Fotoğrafın uzantısını almak
-                var uzanti=Path.GetExtension(Foto.FileName);
-                var yendiAd=Guid.NewGuid()+"."+ uzanti;
-                var yol=Path.Combine(Directory.GetCurrentDirectory(),"wwwroot\\img",yendiAd);
-
-                if(Foto.ContentType=="image/png"|| Foto.ContentType=="image/jpeg" ||Foto.ContentType=="image/jpg")
+                if(Foto != null)
                 {
-                    using(var stream=new FileStream(yol,FileMode.Create))
+                    //Fotoğrafın uzantısını almak
+                    var uzanti=Path.GetExtension(Foto.FileName);
+                    var yendiAd=Guid.NewGuid()+"."+ uzanti;
+                    var yol=Path.Combine(Directory.GetCurrentDirectory(),"wwwroot\\img",yendiAd);
+
+                    if(Foto.ContentType=="image/png"|| Foto.ContentType=="image/jpeg" ||Foto.ContentType=="image/jpg")
                     {
-                        try
+                        using(var stream=new FileStream(yol,FileMode.Create))
                         {
-                            Foto.CopyTo(stream);
-                            var id=tarifler.Count()+1;
-                            tarif.Id=id;
-                            tarif.Foto=yendiAd;
-                            tarifler.Add(tarif);
-                            return RedirectToAction("Index","Tarif");
+                            try
+                            {
+                                Foto.CopyTo(stream);
+                                tarif.Foto=yendiAd;
+                                _appDbContext.Tarifler.Add(tarif);// fotoğrafı ekledi
+                                _appDbContext.SaveChanges(); //veri tabanına kaydetti
+                                return RedirectToAction("Index","Tarif");
+                            }
+                            catch (Exception ex)
+                            {
+                                ViewBag.Hata="Dosya Yükleme Hatası :"+ex.Message;
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            ViewBag.Hata="Dosya Yükleme Hatası :"+ex.Message;
-                        }
-                    }
-                } else { ViewBag.Hata="jpg ya da png Yükle";}
+                    } else { ViewBag.Hata="jpg ya da png Yükle";}
+
+                }
 
                
             }else {ViewBag.Hata="Dosya Yükle";}

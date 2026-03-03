@@ -1,4 +1,5 @@
 @using System.Security.Cryptography
+@model Tarif
 @{
     ViewData["Title"]="Create";
 }
@@ -9,36 +10,42 @@
     <p class="text-danger my-2">@ViewBag.Hata</p>
 }
 
+<div asp-validation-summary="All"></div>
+
 <form asp-action="Create" asp-controller="Tarif" method="post" enctype="multipart/form-data">
 
     <div class="container">
         <form>
             <div class="mb-3 row">
-                <label for="inputName" class="col-4 col-form-label" >Ad</label>
+                <label asp-for="Ad" class="col-4 col-form-label" >Ad</label>
                 <div class="col-8">         
-                    <input type="text" class="form-control" name="Ad" id="inputName" placeholder="Ad" />
+                    <input asp-for="Ad" class="form-control" id="inputName" placeholder="Ad" />
+                    <span asp-validation-for="Ad" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="mb-3 row">
-                <label for="inputName" class="col-4 col-form-label" >Malzemeler</label>
+                <label asp-for="Malzemeler"-for class="col-4 col-form-label" >Malzemeler</label>
                 <div class="col-8">
-                    <input type="text" class="form-control" name="Malzemeler" id="inputName" placeholder="Malzemeler" />
+                    <input asp-for="Malzemeler" class="form-control" id="inputName" placeholder="Malzemeler" />
+                    <span asp-validation-for="Malzemeler" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="mb-3 row">
-                <label for="inputName" class="col-4 col-form-label" >Tarif</label>
+                <label asp-for="Yonerge" for class="col-4 col-form-label" >Tarif</label>
                 <div class="col-8">
-                    <input type="text" class="form-control" name="Yonerge" id="inputName" placeholder="Yapılış" />
+                    <input asp-for="Yonerge" class="form-control" id="inputName" placeholder="Yapılış" />
+                    <span asp-validation-for="Yonerge" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="mb-3 row">
-                <label for="inputName" class="col-4 col-form-label"> Fotoğraf</label>
+                <label asp-for="Foto" class="col-4 col-form-label"> Fotoğraf</label>
                 <div class="col-8">
                     <div class="mb-3">
                         <input type="file" class="form-control" name="Foto" id="inputName" placeholder="Fotoğraf Yükle" aria-describedby="fileHelpId" />
+                        <span asp-validation-for="Foto" class="text-danger"></span>
                     </div>
                     
                 </div>

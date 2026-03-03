@@ -16,10 +16,10 @@ namespace yemekSitesi.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Ad = table.Column<string>(type: "TEXT", nullable: true),
-                    Malzemeler = table.Column<string>(type: "TEXT", nullable: true),
-                    Yonerge = table.Column<string>(type: "TEXT", nullable: true),
-                    Foto = table.Column<string>(type: "TEXT", nullable: true)
+                    Ad = table.Column<string>(type: "TEXT", nullable: false),
+                    Malzemeler = table.Column<string>(type: "TEXT", nullable: false),
+                    Yonerge = table.Column<string>(type: "TEXT", nullable: false),
+                    Foto = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

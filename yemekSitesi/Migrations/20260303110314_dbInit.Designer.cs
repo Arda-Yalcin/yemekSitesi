@@ -10,7 +10,7 @@ using yemekSitesi.Data;
 namespace yemekSitesi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260303084719_dbInit")]
+    [Migration("20260303110314_dbInit")]
     partial class dbInit
     {
         /// <inheritdoc />
@@ -26,15 +26,19 @@ namespace yemekSitesi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Ad")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Foto")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Malzemeler")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Yonerge")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

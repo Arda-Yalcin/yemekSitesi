@@ -23,15 +23,19 @@ namespace yemekSitesi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Ad")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Foto")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Malzemeler")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Yonerge")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
