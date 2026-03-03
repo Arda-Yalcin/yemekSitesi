@@ -5,7 +5,9 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Logging;
+using yemekSitesi.Data;
 using yemekSitesi.Models;
 
 
@@ -14,22 +16,30 @@ namespace yemekSitesi.Controllers
     public class TarifController : Controller
     {
         public static List<Tarif> tarifler= new();
-        public TarifController()
+        private readonly AppDbContext _appDbContext;
+        public TarifController(AppDbContext appDbContext)
         {
-            if(!tarifler.Any())
-            {
-                tarifler.Add(new Tarif {Id=1, Ad="Domates Çorbası", Malzemeler="Domates", Yonerge="Domatesleri doğra..", Foto="yemek1.jpg"});
-                tarifler.Add(new Tarif {Id=2, Ad="Tarhana Çorbası", Malzemeler="Tarhana", Yonerge="Tarhanayı suyla beraber pişir", Foto="yemek2.jpg"});
-                tarifler.Add(new Tarif {Id=3, Ad="Yayla Çorbası", Malzemeler="Pirinçle, Su", Yonerge="Pirinci suyla beraber pişir", Foto="yemek3.jpg"});
-                tarifler.Add(new Tarif {Id=4, Ad="Şehriye Çorbası", Malzemeler="Şehriye, Su", Yonerge="Şehriyeyi suyla beraber pişir", Foto="yemek4.jpg"});
-                tarifler.Add(new Tarif {Id=5, Ad="Kelle Paça Çorbası", Malzemeler="kelle eti, paça eti, Su", Yonerge="kelle ve paça etleri kaynatılır", Foto="yemek5.jpg"});
-            }
+            _appDbContext=appDbContext;
         }
 
         public IActionResult Index()
         {
+            var tarifler=_appDbContext.Tarifler.ToList();
             return View(tarifler);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
         public IActionResult Delete(int id)
         {
             var tarif = tarifler.FirstOrDefault(x=>x.Id==id);

@@ -1,3 +1,4 @@
+@using Microsoft.EntityFrameworkCore.Infrastructure
 @model List<Tarif>
 
 @{
@@ -15,24 +16,32 @@
    
 }
 
-<div class="row">
+@if(!Model.Any())
+{
+    <div class="row">
     @foreach(var item in Model){
 
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <img src="img/@item.Foto" alt="">
-                <h3 class="card-title">@item.Ad</h3>
-                <p class="card-text">Malzemeler = @item.Malzemeler</p>
-                <p class="card-text">Yapiliş = @item.Yonerge</p>
-                <button class="btn btn-danger" onclick="yemekSil(@item.Id)">Sil</button>   
-                <a asp-action="Edit" asp-controller="Tarif" class="btn btn-primary" asp-route-id=@item.Id> Düzenle</a>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <img src="img/@item.Foto" alt="">
+                    <h3 class="card-title">@item.Ad</h3>
+                    <p class="card-text">Malzemeler = @item.Malzemeler</p>
+                    <p class="card-text">Yapiliş = @item.Yonerge</p>
+                    <button class="btn btn-danger" onclick="yemekSil(@item.Id)">Sil</button>   
+                    <a asp-action="Edit" asp-controller="Tarif" class="btn btn-primary" asp-route-id=@item.Id> Düzenle</a>
+                </div>
             </div>
         </div>
+    
+    }
     </div>
- 
+}else{
+    <div class="row">
+        Tarif yok
+    </div>
 }
-</div>
+
 
 
 @section Scripts{
